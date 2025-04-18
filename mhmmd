@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kent Teknoloji</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Google Font API -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      #parallax-bg {
+        transition: transform 0.1s ease-out;
+        will-change: transform;
+      }
+      .link-underline {
+        position: relative;
+        display: inline-block;
+      }
+      .link-underline::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: currentColor;
+        transition: width 0.3s ease-in-out;
+      }
+      .link-underline:hover::before {
+        width: 100%;
+      }
+      .dosis-400 {
+        font-family: "Dosis", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .dosis-500 {
+        font-family: "Dosis", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+      }
+      .dosis-600 {
+        font-family: "Dosis", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+      }
+      /* Mobil menü animasyonu */
+      .mobile-menu {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateY(-100%);
+        opacity: 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        background-color: #1f2937; /* Ensure background is visible */
+      }
+      .mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    </style>
+    <script>
+      // Çeviri verileri
+      const translations = {
+        tr: {
+          anasayfa: "Anasayfa",
+          kurumsal: "Kurumsal",
+          hizmetler: "Hizmetler",
+          iletisim: "İletişim",
+          slogan: "Geleceği Birlikte Kodlayalım",
+          "slogan-desc":
+            "Yenilikçi çözümlerimizle işinizi dijital dünyaya taşıyoruz.",
+          kesfet: "Hizmetlerimizi Keşfet",
+          hizmetlerimiz: "Hizmetlerimiz",
+          "hizmet-desc":
+            "Kent Teknoloji olarak müşterilerimize en yüksek kalitede teknolojik çözümler sunuyoruz. İhtiyaçlarınıza özel yazılım geliştirme, dijital dönüşüm ve teknoloji danışmanlığı hizmetlerimizle yanınızdayız.",
+          yazilim: "Yazılım Geliştirme",
+          "yazilim-desc":
+            "Özel yazılım çözümleri ve mobil uygulamalar geliştiriyoruz.",
+          bulut: "Bulut Hizmetleri",
+          "bulut-desc":
+            "Güvenli ve ölçeklenebilir bulut altyapı çözümleri sunuyoruz.",
+          dijital: "Dijital Dönüşüm",
+          "dijital-desc":
+            "İşletmenizi geleceğe taşıyacak dijital dönüşüm stratejileri.",
+          hakkinda: "Hakkında",
+          iletisim: "İletişim",
+          copyright: "© 2025 Kent Teknoloji",
+        },
+        en: {
+          anasayfa: "Home",
+          kurumsal: "Corporate",
+          hizmetler: "Services",
+          iletisim: "Contact",
+          slogan: "Let's Code the Future Together",
+          "slogan-desc":
+            "We bring your business to the digital world with our innovative solutions.",
+          kesfet: "Discover Our Services",
+          hizmetlerimiz: "Our Services",
+          "hizmet-desc":
+            "As Kent Technology, we offer the highest quality technological solutions to our customers. We are with you with our software development, digital transformation and technology consultancy services tailored to your needs.",
+          yazilim: "Software Development",
+          "yazilim-desc":
+            "We develop custom software solutions and mobile applications.",
+          bulut: "Cloud Services",
+          "bulut-desc":
+            "We provide secure and scalable cloud infrastructure solutions.",
+          dijital: "Digital Transformation",
+          "dijital-desc":
+            "Digital transformation strategies that will carry your business into the future.",
+          hakkinda: "About",
+          iletisim: "Contact",
+          copyright: "© 2025 Kent Technology",
+        },
+      };
+    </script>
+  </head>
+  <body class="dark:bg-gray-900">
+    <!-- Arka plan görseli -->
+    <div
+      id="parallax-bg"
+      class="fixed w-full h-1/2 top-0 left-0 z-0 bg-cover bg-center"
+      style="
+        background-image: url('https://media.istockphoto.com/id/838717596/tr/foto%C4%9Fraf/dots-ba%C4%9Flama-ile-arka-plan.jpg?s=2048x2048&w=is&k=20&c=U0W6v_3yQiC2fdWPjzmiu7bE0THRwN_he6QnBOx7c3o=');
+        background-position: center top;
+      "
+    ></div>
+    <div class="relative z-10 min-h-screen">
+      <!-- NAVBAR -->
+      <nav
+        id="navbar"
+        class="fixed w-full z-20 top-0 start-0 border-b border-transparent transition-colors duration-300 bg-transparent"
+      >
+        <div
+          class="max-w-screen-xl w-full flex flex-wrap items-center justify-between mx-auto p-4"
+        >
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center my-1">
+            <a href="#">
+              <img
+                src="kent-teknoloji.jpg"
+                alt="Kent Teknoloji Logo"
+                class="h-16 md:h-28 w-auto rounded-md"
+              />
+            </a>
+          </div>
+          <!-- Hamburger Menü Butonu (Mobil) -->
+          <div class="flex md:hidden items-center space-x-3">
+            <!-- Dil Seçici (Mobil) -->
+            <div class="relative">
+              <button
+                id="mobile-language-toggle"
+                class="flex items-center text-white bg-transparent hover:bg-gray-700 focus:outline-none font-medium rounded-lg text-sm px-2 py-1 text-center transition-colors duration-300"
+              >
+                <span id="mobile-current-lang">TR</span>
+                <svg
+                  class="w-2.5 h-2.5 ml-1"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <div
+                id="mobile-language-dropdown"
+                class="hidden absolute z-50 bg-gray-700 rounded-lg shadow w-24 right-0"
+              >
+                <ul class="py-2 text-sm text-gray-200">
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 hover:bg-gray-600 hover:text-white"
+                      data-lang="tr"
+                      >Türkçe (TR)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 hover:bg-gray-600 hover:text-white"
+                      data-lang="en"
+                      >English (EN)</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Hamburger Menü İkonu -->
+            <button
+              id="menu-toggle"
+              type="button"
+              class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Ana menüyü aç</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Menü (Desktop) -->
+          <div class="hidden md:flex items-center" id="navbar-sticky">
+            <ul class="flex space-x-8 font-medium">
+              <li>
+                <a
+                  href="#"
+                  class="text-white nav-link hover:text-sky-400 link-underline"
+                  >Anasayfa</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-white nav-link hover:text-sky-400 link-underline"
+                  >Kurumsal</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-white nav-link hover:text-sky-400 link-underline"
+                  >Hizmetler</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-white nav-link hover:text-sky-400 link-underline"
+                  >İletişim</a
+                >
+              </li>
+            </ul>
+            <!-- Dil Seçici (Desktop) -->
+            <div class="relative ml-6">
+              <button
+                id="language-toggle"
+                class="flex items-center text-white bg-transparent hover:bg-gray-700 focus:outline-none font-medium rounded-lg text-sm px-3 py-2 text-center transition-colors duration-300"
+              >
+                <span id="current-lang">TR</span>
+                <svg
+                  class="w-2.5 h-2.5 ml-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
+              <div
+                id="language-dropdown"
+                class="hidden absolute z-50 bg-gray-700 rounded-lg shadow w-24 right-0"
+              >
+                <ul class="py-2 text-sm text-gray-200">
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 hover:bg-gray-600 hover:text-white"
+                      data-lang="tr"
+                      >Türkçe (TR)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="block px-4 py-2 hover:bg-gray-600 hover:text-white"
+                      data-lang="en"
+                      >English (EN)</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Mobil Menü -->
+        <div
+          class="mobile-menu md:hidden w-full bg-gray-800 text-white z-20"
+          id="mobile-menu"
+        >
+          <div class="px-4 pt-2 pb-3 space-y-1">
+            <a
+              href="#"
+              class="block py-2 text-base font-medium text-white hover:bg-gray-700 rounded-md px-3 mobile-nav-link"
+              >Anasayfa</a
+            >
+            <a
+              href="#"
+              class="block py-2 text-base font-medium text-white hover:bg-gray-700 rounded-md px-3 mobile-nav-link"
+              >Kurumsal</a
+            >
+            <a
+              href="#services"
+              class="block py-2 text-base font-medium text-white hover:bg-gray-700 rounded-md px-3 mobile-nav-link"
+              >Hizmetler</a
+            >
+            <a
+              href="#"
+              class="block py-2 text-base font-medium text-white hover:bg-gray-700 rounded-md px-3 mobile-nav-link"
+              >İletişim</a
+            >
+          </div>
+        </div>
+      </nav>
+      <!-- Hero -->
+      <section
+        class="relative z-10 h-1/2 flex items-start justify-center px-4 pt-32"
+        style="min-height: 50vh"
+      >
+        <div class="max-w-screen-lg mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white dosis-600 drop-shadow-lg"
+          >
+            Geleceği Birlikte Kodlayalım
+          </h1>
+          <p
+            class="mt-4 text-lg md:text-xl lg:text-2xl text-white/90 dosis-400"
+          >
+            Yenilikçi çözümlerimizle işinizi dijital dünyaya taşıyoruz.
+          </p>
+          <div class="mt-8 md:mt-10">
+            <a
+              href="#services"
+              class="inline-block text-base md:text-lg px-6 md:px-8 py-2 md:py-3 border border-white bg-transparent text-white font-semibold rounded-full shadow-md hover:bg-white hover:text-black transition duration-300"
+            >
+              Hizmetlerimizi Keşfet
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Ana İçerik -->
+      <div class="bg-white dark:bg-gray-900 py-8 md:py-16">
+        <div class="max-w-screen-lg mx-auto p-4 md:p-8" id="services">
+          <!-- Başlık -->
+          <h2
+            class="dosis-500 text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 text-gray-800 dark:text-gray-100"
+          >
+            Hizmetlerimiz
+          </h2>
+          <!-- Paragraf -->
+          <p
+            class="dosis-500 mb-4 text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 leading-relaxed"
+          >
+            Kent Teknoloji olarak müşterilerimize en yüksek kalitede teknolojik
+            çözümler sunuyoruz. İhtiyaçlarınıza özel yazılım geliştirme, dijital
+            dönüşüm ve teknoloji danışmanlığı hizmetlerimizle yanınızdayız.
+          </p>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-6 md:mt-12"
+          >
+            <!-- Hizmet 1 -->
+            <div
+              class="bg-gray-50 dark:bg-gray-800 p-4 md:p-6 rounded-lg transition duration-500 hover:scale-105"
+            >
+              <h3
+                class="text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-3 text-gray-800 dark:text-white"
+              >
+                <span data-translate="yazilim">Yazılım Geliştirme</span>
+                <span
+                  class="ml-1 inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-blue-800 bg-blue-200 rounded-full"
+                >
+                  <i class="fas fa-laptop-code"></i>
+                </span>
+              </h3>
+              <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
+                Özel yazılım çözümleri ve mobil uygulamalar geliştiriyoruz.
+              </p>
+            </div>
+            <!-- Hizmet 2 -->
+            <div
+              class="bg-gray-50 dark:bg-gray-800 p-4 md:p-6 rounded-lg transition duration-500 hover:scale-105"
+            >
+              <h3
+                class="text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-3 text-gray-800 dark:text-white"
+              >
+                <span data-translate="bulut">Bulut Hizmetleri</span>
+                <span
+                  class="ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-green-800 bg-green-200 rounded-full"
+                >
+                  <i class="fas fa-cloud"></i>
+                </span>
+              </h3>
+              <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
+                Güvenli ve ölçeklenebilir bulut altyapı çözümleri sunuyoruz.
+              </p>
+            </div>
+            <!-- Hizmet 3 -->
+            <div
+              class="bg-gray-50 dark:bg-gray-800 p-4 md:p-6 rounded-lg transition duration-500 hover:scale-105 sm:col-span-2 md:col-span-1"
+            >
+              <h3
+                class="text-base md:text-lg lg:text-xl font-semibold mb-2 md:mb-3 text-gray-800 dark:text-white"
+              >
+                <span data-translate="dijital">Dijital Dönüşüm</span>
+                <span
+                  class="ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-medium text-red-800 bg-red-200 rounded-full"
+                >
+                  <i class="fas fa-sync-alt"></i>
+                </span>
+              </h3>
+              <p class="text-sm md:text-base text-gray-600 dark:text-gray-400">
+                İşletmenizi geleceğe taşıyacak dijital dönüşüm stratejileri.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Yukarı Kaydırma Butonu -->
+    <div
+      id="totop"
+      class="fixed bottom-16 md:bottom-20 right-4 md:right-8 z-50 border border-white text-white rounded-full p-2 md:p-3 mb-1 cursor-pointer opacity-0 transition-all duration-300 hover:bg-white hover:text-gray-800"
+      onclick="scrollToTop()"
+      style="display: none"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 md:w-6 md:h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 15l7-7 7 7"
+        />
+      </svg>
+    </div>
+    <!-- FOOTER -->
+    <footer
+      class="w-full p-4 bg-black text-white border-t border-gray-200 shadow-sm flex flex-col items-center md:flex-row md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600"
+    >
+      <span class="text-center text-sm text-gray-500 dark:text-gray-400"
+        >© 2025 Kent Teknoloji</span
+      >
+      <div class="flex flex-col md:flex-row md:items-center">
+        <!-- Sosyal Medya İkonları -->
+        <div class="flex space-x-6 mt-4 md:mt-0 md:ml-6">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            class="transition duration-300 transform hover:scale-125"
+          >
+            <i
+              class="fab fa-facebook-f text-gray-400 hover:text-blue-600 text-lg"
+            ></i>
+          </a>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            class="transition duration-300 transform hover:scale-125"
+          >
+            <i
+              class="fab fa-twitter text-gray-400 hover:text-blue-400 text-lg"
+            ></i>
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            class="transition duration-300 transform hover:scale-125"
+          >
+            <i
+              class="fab fa-youtube text-gray-400 hover:text-red-600 text-lg"
+            ></i>
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            class="transition duration-300 transform hover:scale-125"
+          >
+            <i
+              class="fab fa-linkedin-in text-gray-400 hover:text-blue-500 text-lg"
+            ></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+    <!-- NAV scroll renk kontrolü -->
+    <script>
+      window.addEventListener("scroll", function () {
+        const nav = document.getElementById("navbar");
+        const scrollTop = window.scrollY;
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollTop / docHeight;
+        const links = document.querySelectorAll(".nav-link");
+        const mobileLinks = document.querySelectorAll(".mobile-nav-link");
+        const langToggle = document.getElementById("language-toggle");
+        const mobileLangToggle = document.getElementById(
+          "mobile-language-toggle"
+        );
+        if (scrollPercent > 0.1) {
+          nav.classList.remove("bg-transparent", "border-transparent");
+          nav.classList.add(
+            "bg-white",
+            "dark:bg-gray-900",
+            "border-gray-200",
+            "dark:border-gray-600"
+          );
+          links.forEach((link) => {
+            link.classList.remove("text-white");
+            link.classList.add("text-gray-900", "dark:text-white");
+          });
+          if (langToggle) {
+            langToggle.classList.remove("text-white");
+            langToggle.classList.add("text-gray-900", "dark:text-white");
+          }
+          const menuToggle = document.getElementById("menu-toggle");
+          if (menuToggle) {
+            menuToggle.classList.remove("text-white");
+            menuToggle.classList.add("text-gray-900", "dark:text-white");
+          }
+          if (mobileLangToggle) {
+            mobileLangToggle.classList.remove("text-white");
+            mobileLangToggle.classList.add("text-gray-900", "dark:text-white");
+          }
+        } else {
+          nav.classList.add("bg-transparent", "border-transparent");
+          nav.classList.remove(
+            "bg-white",
+            "dark:bg-gray-900",
+            "border-gray-200",
+            "dark:border-gray-600"
+          );
+          links.forEach((link) => {
+            link.classList.add("text-white");
+            link.classList.remove("text-gray-900", "dark:text-white");
+          });
+          if (langToggle) {
+            langToggle.classList.add("text-white");
+            langToggle.classList.remove("text-gray-900", "dark:text-white");
+          }
+          const menuToggle = document.getElementById("menu-toggle");
+          if (menuToggle) {
+            menuToggle.classList.add("text-white");
+            menuToggle.classList.remove("text-gray-900", "dark:text-white");
+          }
+          if (mobileLangToggle) {
+            mobileLangToggle.classList.add("text-white");
+            mobileLangToggle.classList.remove(
+              "text-gray-900",
+              "dark:text-white"
+            );
+          }
+        }
+      });
+    </script>
+    <!-- Arka plan yukarı kayma efekti -->
+    <script>
+      window.addEventListener("scroll", function () {
+        const bg = document.getElementById("parallax-bg");
+        let scrollTop = window.scrollY;
+        bg.style.transform = "translateY(" + -scrollTop * 0.3 + "px)";
+      });
+    </script>
+    <!-- Yukarı kaydırma butonu -->
+    <script>
+      window.addEventListener("scroll", function () {
+        const toTopButton = document.getElementById("totop");
+        if (window.scrollY > 10) {
+          toTopButton.style.display = "block";
+          setTimeout(() => {
+            toTopButton.style.opacity = "0.5";
+          }, 50);
+        } else {
+          toTopButton.style.opacity = "0";
+          setTimeout(() => {
+            if (window.scrollY <= 100) {
+              toTopButton.style.display = "none";
+            }
+          }, 300);
+        }
+      });
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <!-- Hamburger Menü İşlemleri -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+        menuToggle.addEventListener("click", function () {
+          mobileMenu.classList.toggle("active");
+        });
+        mobileNavLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            mobileMenu.classList.remove("active");
+          });
+        });
+        document.addEventListener("click", function (event) {
+          if (
+            !mobileMenu.contains(event.target) &&
+            event.target !== menuToggle &&
+            !menuToggle.contains(event.target)
+          ) {
+            mobileMenu.classList.remove("active");
+          }
+        });
+      });
+    </script>
+    <!-- Dil değiştirici script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const langToggle = document.getElementById("language-toggle");
+        const langDropdown = document.getElementById("language-dropdown");
+        const currentLang = document.getElementById("current-lang");
+        const mobileLangToggle = document.getElementById(
+          "mobile-language-toggle"
+        );
+        const mobileLangDropdown = document.getElementById(
+          "mobile-language-dropdown"
+        );
+        const mobileCurrentLang = document.getElementById(
+          "mobile-current-lang"
+        );
+        const navLinks = document.querySelectorAll("#navbar-sticky ul li a");
+        const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+        const elementsToTranslate = {
+          anasayfa: navLinks[0],
+          kurumsal: navLinks[1],
+          hizmetler: navLinks[2],
+          iletisim: navLinks[3],
+          mobil_anasayfa: mobileNavLinks[0],
+          mobil_kurumsal: mobileNavLinks[1],
+          mobil_hizmetler: mobileNavLinks[2],
+          mobil_iletisim: mobileNavLinks[3],
+          slogan: document.querySelector(".text-4xl.md\\:text-5xl"),
+          "slogan-desc": document.querySelector(".mt-4.text-lg"),
+          kesfet: document.querySelector(".inline-block.text-base"),
+          hizmetlerimiz: document.querySelector(".dosis-500.text-2xl"),
+          "hizmet-desc": document.querySelector(".dosis-500.mb-4.text-base"),
+          yazilim: document.querySelector('[data-translate="yazilim"]'),
+          "yazilim-desc": document.querySelectorAll(
+            ".text-sm.md\\:text-base.text-gray-600"
+          )[0],
+          bulut: document.querySelector('[data-translate="bulut"]'),
+          "bulut-desc": document.querySelectorAll(
+            ".text-sm.md\\:text-base.text-gray-600"
+          )[1],
+          dijital: document.querySelector('[data-translate="dijital"]'),
+          "dijital-desc": document.querySelectorAll(
+            ".text-sm.md\\:text-base.text-gray-600"
+          )[2],
+          copyright: document.querySelector("footer .text-center.text-sm"),
+        };
+        if (langToggle) {
+          langToggle.addEventListener("click", function () {
+            langDropdown.classList.toggle("hidden");
+          });
+        }
+        if (mobileLangToggle) {
+          mobileLangToggle.addEventListener("click", function () {
+            mobileLangDropdown.classList.toggle("hidden");
+          });
+        }
+        document.addEventListener("click", function (event) {
+          if (
+            !langDropdown.contains(event.target) &&
+            event.target !== langToggle &&
+            !langToggle.contains(event.target)
+          ) {
+            langDropdown.classList.add("hidden");
+          }
+          if (
+            !mobileLangDropdown.contains(event.target) &&
+            event.target !== mobileLangToggle &&
+            !mobileLangToggle.contains(event.target)
+          ) {
+            mobileLangDropdown.classList.add("hidden");
+          }
+        });
+        document
+          .querySelectorAll("#language-dropdown a")
+          .forEach(function (el) {
+            el.addEventListener("click", function (e) {
+              e.preventDefault();
+              const selectedLang = this.getAttribute("data-lang");
+              currentLang.textContent = selectedLang.toUpperCase();
+              if (mobileCurrentLang) {
+                mobileCurrentLang.textContent = selectedLang.toUpperCase();
+              }
+              switchLanguage(selectedLang);
+              langDropdown.classList.add("hidden");
+              localStorage.setItem("selectedLanguage", selectedLang);
+            });
+          });
+        document
+          .querySelectorAll("#mobile-language-dropdown a")
+          .forEach(function (el) {
+            el.addEventListener("click", function (e) {
+              e.preventDefault();
+              const selectedLang = this.getAttribute("data-lang");
+              if (currentLang) {
+                currentLang.textContent = selectedLang.toUpperCase();
+              }
+              mobileCurrentLang.textContent = selectedLang.toUpperCase();
+              switchLanguage(selectedLang);
+              mobileLangDropdown.classList.add("hidden");
+              localStorage.setItem("selectedLanguage", selectedLang);
+            });
+          });
+        function switchLanguage(lang) {
+          for (const [key, element] of Object.entries(elementsToTranslate)) {
+            if (element) {
+              if (key.startsWith("mobil_")) {
+                const baseKey = key.replace("mobil_", "");
+                if (translations[lang][baseKey]) {
+                  element.textContent = translations[lang][baseKey];
+                }
+              } else if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+              }
+            }
+          }
+        }
+        const savedLanguage = localStorage.getItem("selectedLanguage");
+        if (savedLanguage) {
+          if (currentLang) {
+            currentLang.textContent = savedLanguage.toUpperCase();
+          }
+          if (mobileCurrentLang) {
+            mobileCurrentLang.textContent = savedLanguage.toUpperCase();
+          }
+          switchLanguage(savedLanguage);
+        }
+      });
+    </script>
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  </body>
+</html>
